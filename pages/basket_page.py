@@ -10,9 +10,9 @@ class BasketPage(BasePage):
         assert "basket" in self.browser.current_url, "Basket link is not found"
 
     def should_be_empty_baskets_message(self):
-        baskets_message = self.browser.find_element(*BasketPageLocators.BASKET_MESSAGE).text
-        empty_message = "Your basket is empty."
-        assert baskets_message.find(empty_message) != -1, "No empty message, but it should be"
+        empty_message = self.browser.find_element(*BasketPageLocators.BASKET_MESSAGE).text
+        assert "Your basket is empty. Continue shopping" == empty_message, \
+            f"Basket should be empty, but {empty_message} is presented"
 
     def should_not_be_items_in_basket(self):
         assert self.is_not_element_present(*BasketPageLocators.BASKET_ITEMS), \
